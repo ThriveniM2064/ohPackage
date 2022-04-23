@@ -3,7 +3,7 @@ import com.xworkz.commerce.dao.CustomerDAO;
 import com.xworkz.customer.dto.CustomerDTO;
 import com.xworkz.customer.dto.*;
 import com.xworkz.customer.dto.*;
-
+import com.xworkz.customer.dto.*;
 public class CustomerServiceImplements implements CustomerService {
 	private CustomerDAO dao;
 	private Object customerDAO;
@@ -115,6 +115,28 @@ return false;
 	System.out.println("customer isnot added");
 	return false;
 }
+	private boolean checkaddressandstateDTO(CustomerDTO customerdto)
+	{
+		AddressDTO addressdto=customerDTO.getAddressDTO();
+		if(addressdto!=null && addressdto.getId()>0 && addressdto.getId()<10000 && addressdto.getStreet()!=null && addressdto.getStreet().length()>2
+				&& addressdto.getStreet().length()<100 && addressdto.getDoorNo()!=null && addressdto.getDoorNo().length()>=10000
+				&&  String.valueOf(addressdto.getPincode()).length()==6) {
+			if(addressdto.getStateDTO()!=null && addressdto.getStateDTO().getId()>0
+					&& addressdto.getStateDTO().getId()<200 && addressdto.getStateDTO().getName()!=null
+					&& addressdto.getStateDTO().getName().length()>3
+					&& addressdto.getStateDTO().getName().length()<40
+					&& addressdto.getStateDTO().getNoOfDistricts()>0
+					&& addressdto.getStateDTO().getNoOfDistricts()<100)
+			{
+				return true;
+			}
+			else	
+			{
+		System.out.println("invalid check");
+		return false;
+			}
+	}
+	}
 	@Override
 	public CustomerDTO findByName(String name) {
 		if(name!=null) {
