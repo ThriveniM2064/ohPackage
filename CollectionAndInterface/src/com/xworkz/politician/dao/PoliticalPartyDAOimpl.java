@@ -8,11 +8,12 @@ import com.xworkz.politician.dto.PoliticalPartyDTO;
 
 public class PoliticalPartyDAOimpl  implements PoliticalPartyDAO{
     List<PoliticalPartyDTO> politicalpartyDTO=new LinkedList<>();
+    List<PoliticalPartyDTO> list=new LinkedList<PoliticalPartyDTO>();
     
 	public PoliticalPartyDAOimpl() {
 		System.out.println("Generating   ".concat(this.getClass().getSimpleName()));
 	}
- Comparator<PoliticalPartyDTO> comparator=new PoliticalPartyComparator(); 
+  
 	@Override
 	public boolean save(PoliticalPartyDTO politicalpartydto) {
 		if((!list.contains(politicalpartydto))) {
@@ -24,27 +25,13 @@ public class PoliticalPartyDAOimpl  implements PoliticalPartyDAO{
 		}
 		else {
 			System.out.println("cannot add");
-			
+			return false;
 		}
+		return false;
+	
 	
 	}
-	public void sortById()
-	{
-		System.out.println("before sorting");
-		for(PoliticalPartyDTO politicalpartydto : list) {
-		System.out.println(politicalpartydto);	
-		}
-		System.out.println("after sorting");
-		list.sort(comparator);
-		for(PoliticalPartyDTO politicalpartydto : list)
-		{
-			System.out.println(politicalpartydto);
-		}
-	}
-	public void sortByName()
-	{
-		
-	}
+	
  public void display()
  {
 	 System.out.println(politicalpartyDTO);
@@ -62,6 +49,7 @@ public class PoliticalPartyDAOimpl  implements PoliticalPartyDAO{
 				{
 					iterator.remove();
 					System.out.println(politicalpartyDTO.size());
+					System.out.println("deleted name is"+name);
 					return dto;
 				}
 			}
@@ -70,6 +58,14 @@ public class PoliticalPartyDAOimpl  implements PoliticalPartyDAO{
 		return null;
 		// TODO Auto-generated method stub
 		
+	}
+
+	public List<PoliticalPartyDTO> sort(Comparator<PoliticalPartyDTO> comparator) {
+		if(comparator!=null) {
+			list.sort(comparator);
+			return list;
+		}
+		return null;
 	}
 
 	//public void save(PoliticalPartyDTO politicalpartydto2) {
