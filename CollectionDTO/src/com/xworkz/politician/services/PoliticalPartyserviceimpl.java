@@ -1,9 +1,12 @@
 package com.xworkz.politician.services;
 
+import java.util.Comparator;
+import java.util.List;
+
 import com.xworkz.politicianparty.dao.PaliticalPartyDAO;
 import com.xworkz.politicianparty.dao.PoliticalPartyDAOimplem;
 import com.xworkz.politicianparty.dto.PoliticalPartyDTO;
-
+import com.xworkz.politician.sort.SortById;
 public class PoliticalPartyserviceimpl implements PoliticalPartyService{
 	private PaliticalPartyDAO dao;
 
@@ -34,6 +37,11 @@ public class PoliticalPartyserviceimpl implements PoliticalPartyService{
 		if(name!=null)
 		{
 			dao.deleteByName(name);
+			System.out.println("deleting name is---"+name);
 		}
+	}
+	public List<PoliticalPartyDTO> sortByName()
+	{
+		Comparator<PoliticalPartyDTO> sortname=new SortByName();
 	}
 	}
